@@ -9,13 +9,13 @@ router.get('/', function (req, res, next) {
     let urlObj = { url:quakeAPI.default_query(), json: true }
     request(urlObj, function (error, response, body) {
         if (!error && response.statusCode === 200) {
+            newsAPI.itr(body);
             res.render('index', { 
                 title: "Shocking Habits", 
                 quakes: JSON.stringify(quakeAPI.JsonToCoordArr(body)) 
             });
             //development
             console.log(body.metadata.totalCount);
-            console.log(Object.keys(body));
         }
         else res.render('error', { error });
     });
