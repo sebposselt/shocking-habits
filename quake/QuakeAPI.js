@@ -25,27 +25,27 @@ exports.Qconst = function(obj) {
     }
 
     for (var i in obj) {
-        // if (obj.hasOwnProperty(i)){
+        if (obj.hasOwnProperty(i)){
             res = res + "&" + String(i) + "=" + String(obj[i]);
-        // }
+        }
     }
     res = URL + res + "&format=json";
-    console.log(res);
     return res;
 }
 
 exports.default_query = function(){
-    const today = new Date();
+    let today = new Date();
+    let nextYear = today.getFullYear() + 1;
+    today = (String(today.getFullYear()) +"-" + String(today.getMonth()) +"-" + String(today.getDate()));
     var res = new this.ParamConst(
-    (String(today.getFullYear()) +"-" + String(today.getMonth()) +"-" + String(today.getDate())),
-    today.getFullYear() + 1,
-    0.0,
-    10,
-    42
+    today,
+    nextYear,
+    0.0, //minmax
+    10,  //maxmag
+    42   //limit
     );
     return this.Qconst(res);
 }
-
 
 exports.JsonToCoordArr = function(obj) {
     var res = []
