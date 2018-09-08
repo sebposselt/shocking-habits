@@ -1,7 +1,7 @@
 const request = require('request');
 const express = require('express');
-const quakeAPI = require("../quake/QuakeAPI");
-const newsAPI = require("../news/NewsAPI");
+const quakeAPI = require("../lib/QuakeAPI");
+const newsAPI = require("../lib/NewsAPI");
 const router = express.Router();
 
 /* GET home page. */
@@ -15,6 +15,7 @@ router.get('/', function (req, res, next) {
             });
             //development
             console.log(body.metadata.totalCount);
+            console.log(Object.keys(body));
         }
         else res.render('error', { error });
     });
