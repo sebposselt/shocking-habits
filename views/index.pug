@@ -1,8 +1,8 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title} here are som quakes:
+  h1(align="center") #{title}
+  p(align="center") Welcome to #{title}
   #form
   form(action='/', method='POST', target="_self")
     | start:

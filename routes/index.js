@@ -16,7 +16,7 @@ router.get('/', function (req, res, next) {
             for (let i = 0; i < newsArticles.length; i++) {
                 const elem = newsArticles[i];
                 console.log((elem.articles).length);
-                console.log(global.DATA_READY);
+                console.log(global.DATA_READY)
             }
             /// 
             res.render('index', { 
