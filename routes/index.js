@@ -11,7 +11,7 @@ router.get('/', function (req, res, next) {
     request(urlObj, function (error, response, body) {
         if (!error && response.statusCode === 200) {
             //// dev
-            let newsArticles = newsAPI.itr(body);
+            //let newsArticles = newsAPI.itr(body);
             console.log("ATTENTION: ",newsArticles.length);
             for (let i = 0; i < newsArticles.length; i++) {
                 const elem = newsArticles[i];
