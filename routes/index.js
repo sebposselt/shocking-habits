@@ -5,9 +5,33 @@ const apiKey = "7f6d6af01b654998bede1ea159f7f3b7"
 const NewsAPI = require('newsapi');
 const newsAPI = require("../lib/NewsAPI");
 const newsapi = new NewsAPI(apiKey);
-const global = require("../lib/Global");
 var bluebird = require("bluebird")
 const router = express.Router();
+
+
+function loopArticles (quake,articles,page) {
+    quake.page = page;
+    newsapi.v2.everything(quake)
+        .then(response => {
+            console.log("€€€€€€€€€€€€€€", page + 1000);
+            //dev
+            // console.log("in the then")
+            // console.log("response:")
+            // console.log(response)
+            if (response.status !== "ok") {
+                console.log("newsapi error: ", response)
+                return [];
+            }
+            else if ((response.articles).length !== 0) {
+                //dev
+                console.log("##############Page################### : ", page);
+                console.log("##############length################### : ", (response.articles).length);
+                return loopArticles(quake, (articles.concat(response.articles)), ++page);
+            }
+            else return articles;
+        });
+}
+
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -15,27 +39,9 @@ router.get('/', function (req, res, next) {
 	request(urlObj, function (error, response, body) {
 		if (!error && response.statusCode === 200) {
 			//// dev
-
 			var quakeJsonObjs = newsAPI.itr(body);
 			return bluebird.map(quakeJsonObjs, (quake) => {
-				quake.page = 1;
-				console.log("in the each with quake:", quake);
-				return newsapi.v2.everything(quake)
-					.then(response => {
-						//dev
-						console.log("in the then")
-						console.log("response:")
-						console.log(response)
-						if (response.status !== "ok") {
-							console.log("newsapi error: ", response)
-						}
-						if ((response.articles).length !== 0) {
-							//dev
-							console.log("##############length################### : ", (response.articles).length);
-							this.articlesTotal = response.totalResults;
-							return response.articles;
-						}
-					});
+                return loopArticles(quake,[],1);
 			}).then((articles) => {
 				console.log("ATTENTION: ", articles.length);
 				console.log("ATTENTION, ARTICLES AFTER MAP:");
