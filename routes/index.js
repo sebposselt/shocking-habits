@@ -14,40 +14,42 @@ router.get('/', function (req, res, next) {
 	let urlObj = { url: quakeAPI.default_query(), json: true }
 	request(urlObj, function (error, response, body) {
 		if (!error && response.statusCode === 200) {
-			//// dev
-
-			var quakeJsonObjs = newsAPI.itr(body);
+            
+            //return array of parameter objects used to query the newsAPI
+            var quakeJsonObjs = newsAPI.itr(body);
 			return bluebird.map(quakeJsonObjs, (quake) => {
 				quake.page = 1;
-				console.log("in the each with quake:", quake);
+				//console.log("in the each with quake:", quake);
 				return newsapi.v2.everything(quake)
 					.then(response => {
 						//dev
-						console.log("in the then")
-						console.log("response:")
-						console.log(response)
+						//console.log("in the then")
+						// console.log("response:")
+                        // console.log(response)
+                        //
 						if (response.status !== "ok") {
 							console.log("newsapi error: ", response)
 						}
 						if ((response.articles).length !== 0) {
 							//dev
 							console.log("##############length################### : ", (response.articles).length);
-							this.articlesTotal = response.totalResults;
+                            //
 							return response.articles;
 						}
 					});
 			}).then((articles) => {
-				console.log("ATTENTION: ", articles.length);
-				console.log("ATTENTION, ARTICLES AFTER MAP:");
-				console.log(JSON.stringify(articles))
-				/// 
+                //dev
+                //console.log("ATTENTION: ", articles.length);
+				//console.log("ATTENTION, ARTICLES AFTER MAP:");
+				//console.log(JSON.stringify(articles))
 				console.log(body.metadata.totalCount);
+				///
 				res.render('index', {
 					title: "Shocking Habits",
-					quakes: JSON.stringify(quakeAPI.JsonToMarker(body, articles))
+					quakes: JSON.stringify(quakeAPI.JsonToMarker(body, articles)),
+					max: global.EARTHQUAKE_LIMIT
 				});
 			});
-			//development
 		}
 		else {
 			console.log("request error: ", error);
@@ -69,8 +71,11 @@ router.post("/", function (req, res) {
 	let urlObj = { url: quakeAPI.Qconst(userQuery), json: true };
 	request(urlObj, function (error, response, body) {
 		if (!error && response.statusCode === 200) {
-            //TODO
-			res.render('index', { title: "Shocking Habits", quakes: JSON.stringify(quakeAPI.JsonToCoordArr(body)) });
+            //TODO fix this line!!!
+			res.render('index', {
+				title: "Shocking Habits", 
+				quakes: JSON.stringify(quakeAPI.JsonToMarker (body,[])),
+				max: global.EARTHQUAKE_LIMIT });
 			//development
 			console.log(body.metadata.totalCount);
 		}
@@ -79,3 +84,4 @@ router.post("/", function (req, res) {
 });
 
 module.exports = router;
+
