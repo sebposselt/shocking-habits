@@ -5,6 +5,7 @@ const quakeAPI = require("../lib/QuakeAPI");
 const global = require("../lib/Global");
 const newsAPI = require("../lib/NewsAPI");
 const parser = require("../lib/Parser");
+const stats = require("../lib/Stats");
 const apiKey = global.NEWSAPIKEY;
 const NewsAPI = require('newsapi');
 const newsapi = new NewsAPI(apiKey);
@@ -46,10 +47,12 @@ router.get('/', function (req, res, next) {
 				console.log(body.metadata.totalCount);
 				let scoreArr = parser.score(body,articles);
 				let renderQuakes = quakeAPI.JsonToMarker(body, scoreArr);
+				
 				res.render('index', {
 					title: "Shocking Habits",
 					quakes: JSON.stringify(renderQuakes),
-					max: global.EARTHQUAKE_LIMIT
+					max: global.EARTHQUAKE_LIMIT,
+					stats: stats.getStats(body, scoreArr)
 				});
 			});
 		}

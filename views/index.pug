@@ -5,35 +5,34 @@ block content
   p(align="center") Welcome to #{title}
   
   #form
-  form(action='/', method='POST', target="_self")
-    | start:
-    input(type='text', name='start', placeholder='2017-12-31')
-  
-    |       end:
+    form(action='/', method='POST', target="_self")
+      | start:
+      input(type='text', name='start', placeholder='2017-12-31')
     
-    input(type='text', name='end', placeholder='2019')
-    
-    |       minmag:
-    
-    input(type='text', name='minmag', placeholder='0.5')
-    
-    |       maxmag:
-    
-    input(type='text', name='maxmag', placeholder='8.7')
-    
-    |       limit (max #{max}):
-    
-    input(type='text', name='limit', placeholder='10')
-    
-    input(type='submit', value='search')
+      |       end:
+      
+      input(type='text', name='end', placeholder='2019')
+      
+      |       minmag:
+      
+      input(type='text', name='minmag', placeholder='0.5')
+      
+      |       maxmag:
+      
+      input(type='text', name='maxmag', placeholder='8.7')
+      
+      |       limit (max #{max}):
+      
+      input(type='text', name='limit', placeholder='10')
+      
+      input(type='submit', value='search')
   
   #map
-  script(type='text/javascript').  
-    var quake_lst = !{quakes};
-    //- testing
-    console.log(quake_lst);
-  script(src='/javascripts/map.js')
-  script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBhdCF-Dzv6dN3BOttGumZ3-pJ5g5Ayt54&callback=initMap')
-  
-  #stat
-  
+    script(type='text/javascript').  
+      var quake_lst = !{quakes};
+      //- testing
+      console.log(quake_lst);
+    script(src='/javascripts/map.js')
+    script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBhdCF-Dzv6dN3BOttGumZ3-pJ5g5Ayt54&callback=initMap')
+    
+  #{stats}
