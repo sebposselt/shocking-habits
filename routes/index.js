@@ -1,12 +1,13 @@
 const request = require('request');
 const express = require('express');
+const bluebird = require("bluebird")
 const quakeAPI = require("../lib/QuakeAPI");
 const global = require("../lib/Global");
+const newsAPI = require("../lib/NewsAPI");
+const parser = require("../lib/Parser");
 const apiKey = global.NEWSAPIKEY;
 const NewsAPI = require('newsapi');
-const newsAPI = require("../lib/NewsAPI");
 const newsapi = new NewsAPI(apiKey);
-var bluebird = require("bluebird")
 const router = express.Router();
 
 /* GET home page. */
@@ -43,10 +44,11 @@ router.get('/', function (req, res, next) {
 				//console.log("ATTENTION, ARTICLES AFTER MAP:");
 				//console.log(JSON.stringify(articles))
 				console.log(body.metadata.totalCount);
-				///
+				let scoreArr = parser.score(body,articles);
+				let renderQuakes = quakeAPI.JsonToMarker(body, scoreArr);
 				res.render('index', {
 					title: "Shocking Habits",
-					quakes: JSON.stringify(quakeAPI.JsonToMarker(body, articles)),
+					quakes: JSON.stringify(renderQuakes),
 					max: global.EARTHQUAKE_LIMIT
 				});
 			});
