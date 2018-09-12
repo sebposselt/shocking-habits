@@ -1,11 +1,11 @@
 const request = require('request');
 const express = require('express');
 const quakeAPI = require("../lib/QuakeAPI");
-const apiKey = "7f6d6af01b654998bede1ea159f7f3b7"
+const global = require("../lib/Global");
+const apiKey = global.NEWSAPIKEY;
 const NewsAPI = require('newsapi');
 const newsAPI = require("../lib/NewsAPI");
 const newsapi = new NewsAPI(apiKey);
-const global = require("../lib/Global");
 var bluebird = require("bluebird")
 const router = express.Router();
 
@@ -69,6 +69,7 @@ router.post("/", function (req, res) {
 	let urlObj = { url: quakeAPI.Qconst(userQuery), json: true };
 	request(urlObj, function (error, response, body) {
 		if (!error && response.statusCode === 200) {
+            //TODO
 			res.render('index', { title: "Shocking Habits", quakes: JSON.stringify(quakeAPI.JsonToCoordArr(body)) });
 			//development
 			console.log(body.metadata.totalCount);
