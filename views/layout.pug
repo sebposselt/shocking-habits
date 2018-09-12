@@ -4,9 +4,25 @@ html
     title= Quake
     link(rel='stylesheet', href='/stylesheets/style.css')
   style.
+    #wrapper{
+    width: 100%;
+    border: 2px solid black;
+    overflow: hidden; /* add this to contain floated children */
+    }
+    
+    #stats{
+      width: 18%; 
+      height:600px; 
+      float:left; 
+      margin:10px
+    }
     #map{
+      width: 78%;
       height: 600px;
-      width: 100%;
+      padding-top: 2px
+      float:left;
+      margin:10px
+      overflow: hidden;
     }
   body
     block content

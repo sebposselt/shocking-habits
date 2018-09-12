@@ -27,12 +27,16 @@ block content
       
       input(type='submit', value='search')
   
-  #map
-    script(type='text/javascript').  
-      var quake_lst = !{quakes};
-      //- testing
-      console.log(quake_lst);
-    script(src='/javascripts/map.js')
-    script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBhdCF-Dzv6dN3BOttGumZ3-pJ5g5Ayt54&callback=initMap')
-    
-  #{stats}
+  #wrapper
+
+    #stats
+      #{stats}
+
+    #map
+      script(type='text/javascript').  
+        var quake_lst = !{quakes};
+        //- testing
+        console.log(quake_lst);
+      script(src='/javascripts/map.js')
+      script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBhdCF-Dzv6dN3BOttGumZ3-pJ5g5Ayt54&callback=initMap')
+      
