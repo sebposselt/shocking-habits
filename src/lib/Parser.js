@@ -1,8 +1,13 @@
-
-//takes as input a QuakeArticlesCont object from NewsAPI.js and a magnitude. Return number of articles that include the magnitude in either title or description.
-//returns -1 if error
+//function to give earthquakes a score on how much media attention they generate.
+//input     : return object from seismic API, and 2d array of the earthquakes' articles.
+//output    : array of scores.
+//error     : if an error or exception happens. the earthquake triggering the error will recieve a score of -1.
+//comment   : try/catch to make sure app doesn't crash in case of errors. 
 exports.score = function (seismicAPIObj, articles_2d) {
+    //default response is an array of -1. 
     let scoreArr = Array.from({ length: (seismicAPIObj.features).length }, () => -1);
+    
+    //for ease of eye..
     let obj = seismicAPIObj;
     
     for (let i = 0; i < (obj.features).length; i++) {
@@ -12,7 +17,7 @@ exports.score = function (seismicAPIObj, articles_2d) {
             let score = 0;
             let target = String(elm.properties.mag)
 
-            //catch if there are no articles for this quake 
+            //catch if there are no articles for this quake. (an error related to async calls.) 
             if (articleArr === undefined){
                 articleArr = [];
             }

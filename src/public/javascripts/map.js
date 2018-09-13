@@ -2,7 +2,7 @@ var map;
 function initMap() {
     let options = {
         zoom: 4,
-        center: { lat: -8.61, lng: 116.15 }
+        center: { lat: -25.35, lng: 131.03 } //Uluru 
     };
     let map = new google.maps.Map(document.getElementById("map"), options);
 

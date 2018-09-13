@@ -1,10 +1,10 @@
 const parser = require("./Parser")
 
-
-
-
+// a function to get average media attention of a country/region.
+//input: the return JSON obj from the seismicAPI, and an array of scores for each of those earthquakes
+//output: HTML string with results.
 exports.getStats = function (seismicAPIObj,scoreArr) {
-    let res = "<p>";
+    let res = "";
     let tmp = {};
     for (let i = 0; i < (seismicAPIObj.features).length; i++) {
         let elm = seismicAPIObj.features[i];
@@ -29,15 +29,16 @@ exports.getStats = function (seismicAPIObj,scoreArr) {
     }
     //dev
     //console.log(res + "</p>");
-    return (res + "</p>");
+    return (res );
 }
 
 
 // helper function to get country from "Flinn–Engdahl regions".
 //input: Flinn–Engdahl region:string
-//output: "country if any"
+//output: "country if any || region"
 function getCountry (string) {
     try {
+        //default case to make sure app/service doesn't crash on unexpected input/output.
         res = "UNKNOWN"; //default
         let tmp = string.toLowerCase();
         tmp = tmp.replace(" region", "");

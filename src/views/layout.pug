@@ -4,6 +4,7 @@ html
     title= Quake
     link(rel='stylesheet', href='/stylesheets/style.css')
   style.
+    head {margin-top: 5;}
     #wrapper{
     width: 100%;
     border: 2px solid black;
@@ -12,8 +13,10 @@ html
     
     #stats{
       width: 18%; 
-      height:600px; 
-      float:left; 
+      height:600px;
+      margin:5px; 
+      float:left;
+      overflow-y:scroll 
       margin:10px
     }
     #map{

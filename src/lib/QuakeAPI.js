@@ -1,31 +1,22 @@
 const dateTools = require("./DateTools");
 const global = require("./Global");
-const parser = require("./Parser");
 
-//QuakeAPI.js
-
-//TODO maybe implement as a function that return an object instead of obj Constructor.
 //create object with the paramaters for a quary
-exports.ParamConst = function (start, end, minmag, maxmag, limit) {
+exports.ParamConst = function (start, end, minmag, maxmag, limit) 
+{
     this.start = String(start),
-        this.end = String(end),
-        this.minmag = String(minmag),
-        this.maxmag = String(maxmag)
-    //unsure if needed?
-    // if (!limit || limit>global.EARTHQUAKE_LIMIT ){
-    //     this.limit = String(global.EARTHQUAKE_LIMIT);
-
-    // }
-    //else this.limit = String(limit);
+    this.end = String(end),        
+    this.minmag = String(minmag),
+    this.maxmag = String(maxmag)
     this.limit = limit;
 }
 
-//transfrom paramaters obj url
+//transform parameters obj query url
 exports.Qconst = function (obj) {
     const URL = "http://www.seismicportal.eu/fdsnws/event/1/query?";
     var res = "";
 
-    //check to ensure limit<global.EARTHQUAKE_LIMIT to make site faster and avoid errors from the API
+    //check to ensure limit<global.EARTHQUAKE_LIMIT to make site faster, avoid errors from the API, and limit requests.
     if (!(obj.hasOwnProperty("limit")) || obj.limit > global.EARTHQUAKE_LIMIT) {
         obj.limit = global.EARTHQUAKE_LIMIT;
     }
@@ -43,14 +34,14 @@ exports.default_query = function () {
     let res = new this.ParamConst(
         dateTools.getToday(),
         dateTools.getNextYear(),
-        0.0, //minmax
+        5.0, //minmax
         10,  //maxmag
         global.EARTHQUAKE_LIMIT   //limit
     );
     return this.Qconst(res);
 }
 
-
+//make array of objects that can be handled by the Google Maps API to place markers and infoWindows.
 exports.JsonToMarker = function (obj, scoreArr) {
     var res = []
     for (let i = 0; i < obj.features.length; i++) {

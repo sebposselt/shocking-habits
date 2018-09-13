@@ -47,12 +47,13 @@ router.get('/', function (req, res, next) {
 				console.log(body.metadata.totalCount);
 				let scoreArr = parser.score(body,articles);
 				let renderQuakes = quakeAPI.JsonToMarker(body, scoreArr);
-				
+				let tmp = stats.getStats(body, scoreArr);
+				console.log(tmp);
 				res.render('index', {
 					title: "Shocking Habits",
 					quakes: JSON.stringify(renderQuakes),
 					max: global.EARTHQUAKE_LIMIT,
-					stats: stats.getStats(body, scoreArr)
+					mystats: tmp
 				});
 			});
 		}

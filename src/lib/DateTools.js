@@ -1,5 +1,6 @@
 
 // credit of https://stackoverflow.com/questions/563406/add-days-to-javascript-date
+// edited return to get a YYYY-MM-DD type string, and not the UTC TMI string Date.toString() gives.
 exports.addDays = function (date, days) {
     var today = new Date(date);
     today.setDate(today.getDate() + days);

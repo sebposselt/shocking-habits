@@ -1,15 +1,17 @@
 const dateTools = require('./DateTools');
-const global = require("./Global");
-const apiKey = global.NEWSAPIKEY;
 
+// used by QuakeArticlesCont, but doesn't work correctly.
+// const global = require("./Global");
+// const apiKey = global.NEWSAPIKEY;
 // const NewsAPI = require('newsapi');
 // const newsapi = new NewsAPI(apiKey);
 
-//just for development testing...
-exports.itr = function (payload) {
+
+// iterator to create parameter objects for querying.
+exports.itr = function (seismicAPIObj) {
     let returnArr = [];
-    for (let i = 0; i < (payload.features).length; i++) {
-        let elm = payload.features[i];
+    for (let i = 0; i < (seismicAPIObj.features).length; i++) {
+        let elm = seismicAPIObj.features[i];
         let tmp = paramConst(elm);
         returnArr.push(tmp);
     }
@@ -20,6 +22,7 @@ exports.itr = function (payload) {
 // helper function to create a query string from "Flinn–Engdahl regions".
 //input: Flinn–Engdahl region:string
 //output: "keyword1+keyword2+keyword3..."
+//comment: try/catch and default to ensure the app doesn't crash on error
 function extractKeywords (string) {
     //earthquake should always be a keyword
     let res = "earthquake";
@@ -41,8 +44,8 @@ function extractKeywords (string) {
     }          
     catch (error) {
         console.log("extractKeywords error :", error);
-        //if the input is not passable, return default.
-        return res;   
+        //if the input is not parse-able, return default.
+        return res;
     }
 }
 
