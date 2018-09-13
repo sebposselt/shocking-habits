@@ -1,4 +1,3 @@
-const parser = require("./Parser")
 
 // a function to get average media attention of a country/region.
 //input: the return JSON obj from the seismicAPI, and an array of scores for each of those earthquakes

@@ -31,6 +31,7 @@ router.get('/', function (req, res, next) {
                         //
 						if (response.status !== "ok") {
 							console.log("newsapi error: ", response)
+							return [];
 						}
 						if ((response.articles).length !== 0) {
 							//dev
