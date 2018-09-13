@@ -1,2 +1,2 @@
-exports.EARTHQUAKE_LIMIT = 2;
+exports.EARTHQUAKE_LIMIT = 100;
 exports.NEWSAPIKEY = "7f6d6af01b654998bede1ea159f7f3b7";
