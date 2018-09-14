@@ -10,6 +10,7 @@ const apiKey = global.NEWSAPIKEY;
 const NewsAPI = require('newsapi');
 const newsapi = new NewsAPI(apiKey);
 const router = express.Router();
+const async = require("async");
 
 /* GET home page. */
 router.get('/', function (req, res, next) {

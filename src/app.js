@@ -14,7 +14,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 // To parse post requests
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
