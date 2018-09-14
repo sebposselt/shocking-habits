@@ -32,7 +32,7 @@ exports.Qconst = function (obj) {
 
 exports.default_query = function () {
     let res = new this.ParamConst(
-        dateTools.getToday(),
+        2000, //dateTools.getToday(),
         dateTools.getNextYear(),
         5.0, //minmax
         10,  //maxmag
