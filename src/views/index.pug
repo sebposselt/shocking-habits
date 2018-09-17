@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1(align="center") #{title}
-  p(align="center") Welcome to #{title}
+  p(align="center") Welcome to #{title}. <br> Use the fields to search for earthquakes. Click on the marker and see how my articles were written about that earthquake (Due to API restriction, search for articles within the last month.)
   
   #form
     form(align="center" action='/', method='POST', target="_self")
@@ -30,6 +30,7 @@ block content
   #wrapper
     
     #stats
+      h2 Average media attention for this region: <br>
       p !{mystats}
       
 

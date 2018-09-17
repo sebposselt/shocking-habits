@@ -1,5 +1,5 @@
 //for ease of changing variables used in different parts of the code
-exports.EARTHQUAKE_LIMIT = 2;
+exports.EARTHQUAKE_LIMIT = 10;
 
 //api newAPI restricts request. If one key is closed off, pick another:
 
