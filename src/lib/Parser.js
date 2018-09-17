@@ -3,7 +3,7 @@
 //output    : array of scores.
 //error     : if an error or exception happens. the earthquake triggering the error will recieve a score of -1.
 //comment   : try/catch to make sure app doesn't crash in case of errors. 
-exports.score = function (seismicAPIObj, articles_2d) {
+exports.score = function (seismicAPIObj, newapiResults) {
     //default response is an array of -1. 
     let scoreArr = Array.from({ length: (seismicAPIObj.features).length }, () => -1);
     
@@ -13,7 +13,7 @@ exports.score = function (seismicAPIObj, articles_2d) {
     for (let i = 0; i < (obj.features).length; i++) {
         try {
             let elm = obj.features[i];
-            let articleArr = articles_2d[i];
+            let articleArr = newapiResults[i].articles;
             let score = 0;
             let target = String(elm.properties.mag)
 
