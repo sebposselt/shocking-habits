@@ -25,15 +25,12 @@ router.get('/', async function (req, res, next) {
 		obj.page = 1;
 		return newsapi.v2.everything(obj)
 	});
-	
 	let initialNewsResults = await Promise.all(initialNewsRequests);
-
 	//variables to check fetching article process 
 	let reqFinishedArr = Array.from({ length: initialNewsResults.length }, () => 0);
 	let stopFlag = false;
 	let index_lst = [];
 	let bank = [];
-
 	//loop through NewsAPI results, and see if all articles has been fetched.
 	do {
 		for (let i = 0; i < initialNewsResults.length; i++) {
@@ -42,7 +39,6 @@ router.get('/', async function (req, res, next) {
 				if (elm.totalResults === (elm.articles).length) {
 					reqFinishedArr[i] = 1;
 				}
-
 				else {
 					let nextPageParam = quakeJsonObjs[i]
 					index_lst.push(i);
@@ -54,8 +50,6 @@ router.get('/', async function (req, res, next) {
 			}
 		}
 		let bankResults = await Promise.all(bank);
-
-		
 		for (let j = 0; j < index_lst.length; j++) {
 			//dev. left in to see if a search requires more than 1 request articles pr. earthquake.
 			console.log('Getting more articles');
