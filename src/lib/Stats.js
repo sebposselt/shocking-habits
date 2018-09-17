@@ -21,7 +21,7 @@ exports.getStats = function (seismicAPIObj,scoreArr) {
         }
     }
     for (let i = 0; i < Object.keys(tmp).length; i++) {
-        var elm = tmp[Object.keys(tmp)[i]];
+        let elm = tmp[Object.keys(tmp)[i]];
         len = elm.length;
         //get sum of the array and divide by length to get average.
         elm = (elm.reduce(function (a, b) { return a + b; })/len);

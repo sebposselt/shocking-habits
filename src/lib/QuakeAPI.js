@@ -14,7 +14,7 @@ exports.ParamConst = function (start, end, minmag, maxmag, limit)
 //transform parameters obj query url
 exports.Qconst = function (obj) {
     const URL = "http://www.seismicportal.eu/fdsnws/event/1/query?";
-    var res = "";
+    let res = "";
 
     //check to ensure limit<global.EARTHQUAKE_LIMIT to make site faster, avoid errors from the API, and limit requests.
     if (!(obj.hasOwnProperty("limit")) || obj.limit > global.EARTHQUAKE_LIMIT) {
@@ -43,7 +43,7 @@ exports.default_query = function () {
 
 //make array of objects that can be handled by the Google Maps API to place markers and infoWindows.
 exports.JsonToMarker = function (obj, scoreArr) {
-    var res = []
+    let res = []
     for (let i = 0; i < obj.features.length; i++) {
         let tmp = {};
         let elm = obj.features[i];

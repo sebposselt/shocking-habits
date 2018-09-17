@@ -1,4 +1,4 @@
-var map;
+let map;
 function initMap() {
     let options = {
         zoom: 4,
