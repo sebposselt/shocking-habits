@@ -27,8 +27,6 @@ exports.getStats = function (seismicAPIObj,scoreArr) {
         elm = (elm.reduce(function (a, b) { return a + b; })/len);
         res = res + "<b>" + Object.keys(tmp)[i] + ": </b>" + elm + "<br><br>";
     }
-    //dev
-    //console.log(res + "</p>");
     return (res );
 }
 
