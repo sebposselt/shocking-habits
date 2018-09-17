@@ -1,4 +1,4 @@
-from node:boron
+from node:10.10.0-alpine
 
 copy . /src
 
