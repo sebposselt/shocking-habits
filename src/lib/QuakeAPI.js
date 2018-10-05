@@ -36,7 +36,8 @@ exports.default_query = function () {
         dateTools.getNextYear(),
         6.0, //minmax
         10,  //maxmag
-        global.EARTHQUAKE_LIMIT   //limit
+        1
+        //global.EARTHQUAKE_LIMIT   //limit
     );
     return this.Qconst(res);
 }
